@@ -68,6 +68,10 @@ function markBox(event) {
     }
     turnO = !turnO;
     button.disabled = true;
+    if(drawChecker()){
+        
+        disableAllButtons();
+    }
     if (checkWinner()) {
         winner = turnO ? "X" : "O";
         displayWinnerMessage(winner);
@@ -109,4 +113,23 @@ function displayWinnerMessage(winner){
     let scrollMessage = document.createElement("p");
     scrollMessage.textContent = "Scroll down to view the board. "
     winnerMessage.appendChild(scrollMessage);
+}
+
+function drawChecker(){
+    for(let button of buttons){
+        if(button.innerHTML === ""){
+            return false;
+        }
+    }
+    winnerMessage.style.display = "grid";
+    winnerMessage.innerHTML = "";
+    let message = document.createElement("h1");
+    message.style.height = "60px";
+    message.textContent = "Game is a draw";
+    winnerMessage.appendChild(message);
+    let scrollMessage = document.createElement("p");
+    scrollMessage.textContent = "Scroll down to view the board. "
+    winnerMessage.appendChild(scrollMessage);
+   
+    return true;
 }
